@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Demo</title>
+    <script src="Console.js" defer></script>
+    <script src="MenuController.js"></script>
+    <script src="Vehicle.js"></script>
+    <script src="Car.js"></script>
+    <script src="Plane.js"></script>
+    <script src="Boat.js"></script>
+    <script src="MainMenu.js" defer></script>
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        #console {
+            background-color: #000;
+            color: rgb(195, 255, 167);
+            font-family: monospace;
+            padding: 10px;
+            border: 5px solid rgb(0, 0, 0);
+            height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-size: x-large;
+        }
+
+        #userInput {
+            height: 50px;
+            border: 5px solid #000;
+            font-size: xx-large;
+            margin-top: 5px;
+        }
+
+        #userInputButton {
+            height: 62px;
+            width: 200px;
+            font-size: xx-large;
+            background-color: rgb(31, 221, 255);
+            color: rgb(0, 0, 0);
+            border: 5px solid #000;
+        }
+
+        #userInputButton:hover {
+            border: 5px solid rgb(51, 255, 68);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div id="console"></div>
+    </div>
+    <div>
+        <input id="userInput" placeholder="Type your choice...">
+        <button id="userInputButton" onclick="mainInstance.getConsole().handleUserInput()">Enter</button>
+    </div>
+</body>
+
+</html>
