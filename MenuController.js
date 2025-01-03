@@ -53,4 +53,67 @@ class MenuController {
         }while(option != "0" && option != "1" && option != "2" && option != "3");
         await this.mainMenu.showMainMenu();
     }
+
+    showVehicleList() {
+        const vehicles = Vehicle.getListOfVehicles();
+        if (vehicles.length === 0) {
+            this.console.printLine("No vehicles created yet!", false, [255, 31, 31]);
+        } else {
+            this.console.printLine("SHOWING LIST OF VEHICLES", false, [46, 255, 0]);
+            vehicles.forEach((vehicle, index) => {
+                this.console.printLine(`Vehicle ${index + 1}:`, false, [46, 255, 0]);
+                vehicle.displayDetails(this.console);
+            });
+        }
+    }
+
+    async showDeleteMenu() {
+        const vehicles = Vehicle.getListOfVehicles();
+
+        if (vehicles.length === 0) {
+            this.console.printLine("No vehicles available to delete!", false, [255, 31, 31]);
+            return;
+        }
+
+        this.console.printLine("DELETING VEHICLE", false, [255, 100, 100]);
+        this.showVehicleList(); 
+
+        let option;
+        do {
+            this.console.printLine("Select the vehicle number to delete or enter 0 to return to the Main Menu:");
+            option = await this.console.readLine();
+            const index = parseInt(option, 10) - 1;
+
+            if (option === "0") {
+                this.console.printLine("Returning to Main Menu...", false, [237, 23, 198]);
+                return;
+            }
+
+            if (index >= 0 && index < vehicles.length) {
+                this.console.printLine(`ABOUT TO DELETE VEHICLE NUMBER ${index + 1}`, false, [255, 100, 100]);
+                this.console.printLine("1- DELETE");
+                this.console.printLine("0- CANCEL");
+
+                const confirm = await this.console.readLine();
+                if (confirm === "1") {
+                    vehicles.splice(index, 1);
+                    this.console.printLine("Vehicle deleted successfully!", false, [46, 255, 0]);
+                } else {
+                    this.console.printLine("Deletion cancelled.", false, [255, 31, 31]);
+                }
+                break;
+            } else {
+                this.console.printLine("Invalid vehicle number. Try again.", false, [255, 31, 31]);
+            }
+        } while (option !== "0");
+
+        this.console.printLine("Returning to Main Menu...", false, [237, 23, 198]);
+    }
+
+    async showSystemInfoMenu(){
+        this.console.printLine("SYSTEM INFO:", false, [46, 255, 0]);
+        this.console.printLine("This is a simple demo that was created with the purpose of showcasing some core concepts of JavaScript.", false, [237, 23, 198]);
+        this.console.printLine("The System of Vehicle Creation doesn't do much and it's not important perse; but what I intend to do is to create an example of core concepts and features of OOP JavaScript that can be observed in the code files of this program.", false, [237, 23, 198]);
+        this.console.printLine("Created by José Gassull.", false, [237, 23, 198]);
+    }
 }

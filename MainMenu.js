@@ -16,37 +16,23 @@ class MainMenu {
             this.console.printLine("/////////", false, [46, 255, 0]);
             this.console.printLine("1- CREATE new vehicle");
             this.console.printLine("2- LIST vehicles");
-            this.console.printLine("3- CHOOSE Vehicle");
-            this.console.printLine("4- DELETE Vehicle");
-            this.console.printLine("5- SYSTEM INFO");
+            this.console.printLine("3- DELETE Vehicle");
+            this.console.printLine("4- SYSTEM INFO");
             this.console.printLine("0- EXIT");
             option = await this.console.readLine();
 
             switch (option) {
                 case "1":
                     await this.menuController.showCreateMenu();
-                    option = "0";
                     break;
                 case "2":
-                    const vehicles = Vehicle.getListOfVehicles();
-                    if (vehicles.length === 0) {
-                        this.console.printLine("No vehicles created yet!", false, [255, 31, 31]);
-                    } else {
-                        this.console.printLine("SHOWING LIST OF VEHICLES", false, [46, 255, 0]);
-                        vehicles.forEach((vehicle, index) => {
-                        this.console.printLine(`Vehicle ${index + 1}:`, false, [46, 255, 0]);
-                        vehicle.displayDetails(this.console);
-                        });
-                    }
+                    this.menuController.showVehicleList();
                     break;
                 case "3":
-                    this.console.printLine("Choosing Vehicle!");
+                    await this.menuController.showDeleteMenu();
                     break;
                 case "4":
-                    this.console.printLine("Deleting Vehicle!");
-                    break;
-                case "5":
-                    this.console.printLine("System Info!");
+                    await this.menuController.showSystemInfoMenu();
                     break;
                 case "0":
                     this.console.printLine("System Terminated: Goodbye!", false, [237, 23, 198]);
